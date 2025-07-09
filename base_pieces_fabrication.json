@@ -1,0 +1,92 @@
+[
+    {
+        "nom": "1",
+        "fichier_modele": "models/1.png",
+        "surface_requise": 6545.0,
+        "perimetre": 324.0,
+        "dimensions": {
+            "longueur": 86,
+            "largeur": 78
+        },
+        "contraintes": {
+            "epaisseur": 2.0,
+            "orientation": "indiff\u00e9rente",
+            "matiere": "non sp\u00e9cifi\u00e9e"
+        }
+    },
+    {
+        "nom": "2",
+        "fichier_modele": "models/2.png",
+        "surface_requise": 8003.0,
+        "perimetre": 538.16,
+        "dimensions": {
+            "longueur": 144,
+            "largeur": 124
+        },
+        "contraintes": {
+            "epaisseur": 2.0,
+            "orientation": "indiff\u00e9rente",
+            "matiere": "non sp\u00e9cifi\u00e9e"
+        }
+    },
+    {
+        "nom": "3",
+        "fichier_modele": "models/3.png",
+        "surface_requise": 19652.0,
+        "perimetre": 764.95,
+        "dimensions": {
+            "longueur": 243,
+            "largeur": 191
+        },
+        "contraintes": {
+            "epaisseur": 2.0,
+            "orientation": "indiff\u00e9rente",
+            "matiere": "non sp\u00e9cifi\u00e9e"
+        }
+    },
+    {
+        "nom": "4",
+        "fichier_modele": "models/4.png",
+        "surface_requise": 13323.5,
+        "perimetre": 700.06,
+        "dimensions": {
+            "longueur": 248,
+            "largeur": 99
+        },
+        "contraintes": {
+            "epaisseur": 2.0,
+            "orientation": "indiff\u00e9rente",
+            "matiere": "non sp\u00e9cifi\u00e9e"
+        }
+    },
+    {
+        "nom": "5",
+        "fichier_modele": "models/5.png",
+        "surface_requise": 15313.0,
+        "perimetre": 732.65,
+        "dimensions": {
+            "longueur": 160,
+            "largeur": 105
+        },
+        "contraintes": {
+            "epaisseur": 2.0,
+            "orientation": "indiff\u00e9rente",
+            "matiere": "non sp\u00e9cifi\u00e9e"
+        }
+    },
+    {
+        "nom": "6",
+        "fichier_modele": "models/6.png",
+        "surface_requise": 26597.0,
+        "perimetre": 885.99,
+        "dimensions": {
+            "longueur": 116,
+            "largeur": 304
+        },
+        "contraintes": {
+            "epaisseur": 2.0,
+            "orientation": "indiff\u00e9rente",
+            "matiere": "non sp\u00e9cifi\u00e9e"
+        }
+    }
+]
