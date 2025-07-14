@@ -35,3 +35,12 @@ def augmenter_image(image):
         image = cv2.add(image, noise)
 
     return image
+
+
+def generer_augmentations(image, n=10):
+    images_augmentees = []
+    for _ in range(n):
+        img_aug = augmenter_image(image.copy())
+        images_augmentees.append(img_aug)
+    return images_augmentees
+
