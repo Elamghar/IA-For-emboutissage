@@ -23,5 +23,5 @@ if st.button("Prédire"):
     pred_speed = model_speed.predict(X_scaled)
     pred_time  = model_time.predict(X_scaled)
 
-    st.success(f"✅ Vitesse prédite : **{pred_speed[0]:.3f} m/s**")
-    st.success(f"⏱️ Temps prédit : **{pred_time[0]:.3f} s**")
+    st.success(f" Vitesse prédite : **{pred_speed[0]:.3f} m/s**")
+    st.success(f" Temps prédit : **{pred_time[0]:.3f} s**")
