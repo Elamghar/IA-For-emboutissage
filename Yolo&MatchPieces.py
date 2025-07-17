@@ -134,7 +134,7 @@ st.title("Analyse de Chutes avec Détection et Compatibilité")
 
 # Upload image
 uploaded_file = st.file_uploader("Choisir une image", type=["png", "jpg", "jpeg"])
-model_path = "trainedModel/weights/last.pt"
+model_path = "last.pt"
 
 if uploaded_file:
     st.success(" Image chargée")
