@@ -4,3 +4,11 @@ opencv-python-headless
 matplotlib
 numpy
 Pillow
+
+streamlit>=1.33.0
+requests
+langchain>=0.2.0
+sentence-transformers
+faiss-cpu
+pypdf
+
