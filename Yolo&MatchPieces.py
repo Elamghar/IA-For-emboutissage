@@ -12,8 +12,8 @@ import zipfile
 import os
 
 # Dézipper automatiquement si le dossier n'existe pas
-if not os.path.exists("pieces"):
-    with zipfile.ZipFile("pieces.zip", "r") as zip_ref:
+if not os.path.exists("Pieces"):
+    with zipfile.ZipFile("Pieces.zip", "r") as zip_ref:
         zip_ref.extractall("models")
 
 # Charger la base de données des pièces
