@@ -12,3 +12,6 @@ sentence-transformers
 faiss-cpu
 pypdf
 
+langchain
+langchain-community
+
