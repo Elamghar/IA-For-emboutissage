@@ -14,6 +14,43 @@ with open("base_pieces_fabrication.json", "r") as f:
     base_pieces = json.load(f)
 
 # --- Vérifie si une pièce est compatible avec une chute ---
+def piece_peut_etre_fabriquee2(piece, scrap):
+    # 1. Vérification surface
+    if piece["surface_requise"] > scrap["surface"]:
+        return False
+
+    # 2. Vérification dimensions avec orientation
+    p_L, p_l = piece["dimensions"]["longueur"], piece["dimensions"]["largeur"]
+    s_L, s_l = scrap["dimensions"]["longueur"], scrap["dimensions"]["largeur"]
+
+    orientation = piece.get("contraintes", {}).get("orientation", "indifférente")
+
+    if orientation == "indifférente":
+        fits = (p_L <= s_L and p_l <= s_l) or (p_L <= s_l and p_l <= s_L)
+    else:  # orientation fixe
+        fits = (p_L <= s_L and p_l <= s_l)
+
+    if not fits:
+        return False
+
+    # 3. Vérification épaisseur si présente
+    piece_epaisseur = piece.get("contraintes", {}).get("epaisseur")
+    scrap_epaisseur = scrap.get("caractéristiques", {}).get("epaisseur")
+    if piece_epaisseur is not None and scrap_epaisseur is not None:
+        if piece_epaisseur > scrap_epaisseur:
+            return False
+
+    # 4. Vérification matière si spécifiée
+    piece_matiere = piece.get("contraintes", {}).get("matiere")
+    scrap_matiere = scrap.get("caractéristiques", {}).get("matiere")
+    if piece_matiere and piece_matiere != "non spécifiée":
+        if scrap_matiere is None or piece_matiere.lower() != scrap_matiere.lower():
+            return False
+
+    return True
+
+
+
 def piece_peut_etre_fabriquee(piece, scrap):
     if piece["surface_requise"] > scrap["surface"]:
         return False
@@ -26,20 +63,39 @@ def detect_scraps(model, image_np):
     results = model(image_np)
     annotated_img = image_np.copy()
     colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255)]
+
     scraps_detectes = []
+
+    # Interface utilisateur pour les caractéristiques globales
+    st.sidebar.markdown("### Caractéristiques des chutes")
+    epaisseur_scrap = st.sidebar.number_input("Épaisseur (mm)", value=2.0, step=0.1)
+    matiere_scrap = st.sidebar.selectbox("Matière", ["acier", "aluminium", "bois", "plastique"])
 
     for result in results:
         if result.masks is not None:
             for i, mask in enumerate(result.masks.xy):
                 polygon = np.array(mask, dtype=np.int32)
                 area = cv2.contourArea(polygon)
+                perimeter = cv2.arcLength(polygon, True)
                 x, y, w, h = cv2.boundingRect(polygon)
+
+                confidence = result.boxes.conf[i].item()
+                class_id = int(result.boxes.cls[i])
+                class_name = result.names[class_id]
 
                 scrap = {
                     "id": i,
+                    "class": class_name,
+                    "confidence": confidence,
                     "surface": area,
+                    "perimetre": perimeter,
                     "dimensions": {"longueur": w, "largeur": h},
-                    "polygon": polygon
+                    "bbox": (x, y, w, h),
+                    "polygon": polygon,
+                    "caractéristiques": {
+                        "epaisseur": epaisseur_scrap,
+                        "matiere": matiere_scrap
+                    }
                 }
                 scraps_detectes.append(scrap)
 
